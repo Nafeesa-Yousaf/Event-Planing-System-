@@ -1,0 +1,14 @@
+C:\xampp\htdocs\EventManagementSystem\src\main\java\com\mycompany\eventmanagementsystem\EventManagementSystem.java
+C:\xampp\htdocs\EventManagementSystem\src\main\java\controller\AuthenticationController.java
+C:\xampp\htdocs\EventManagementSystem\src\main\java\controller\EventOrganizorController.java
+C:\xampp\htdocs\EventManagementSystem\src\main\java\models\AuthenticationModel.java
+C:\xampp\htdocs\EventManagementSystem\src\main\java\models\BirthdayEventModel.java
+C:\xampp\htdocs\EventManagementSystem\src\main\java\models\CorporateEventModel.java
+C:\xampp\htdocs\EventManagementSystem\src\main\java\models\CultureEventModel.java
+C:\xampp\htdocs\EventManagementSystem\src\main\java\models\EventModel.java
+C:\xampp\htdocs\EventManagementSystem\src\main\java\models\EventOrganizorModel.java
+C:\xampp\htdocs\EventManagementSystem\src\main\java\models\VenuModel.java
+C:\xampp\htdocs\EventManagementSystem\src\main\java\resources\DatabaseConnection.java
+C:\xampp\htdocs\EventManagementSystem\src\main\java\view\HomeScreen.java
+C:\xampp\htdocs\EventManagementSystem\src\main\java\view\LoginScreen.java
+C:\xampp\htdocs\EventManagementSystem\src\main\java\view\SignupScreen.java
