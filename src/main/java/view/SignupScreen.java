@@ -251,6 +251,10 @@ public class SignupScreen extends javax.swing.JFrame {
 
         if (isSuccess) {
             JOptionPane.showMessageDialog(this, "User successfully registered!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            this.setVisible(false);
+
+            LoginScreen loginForm = new LoginScreen();
+            loginForm.setVisible(true);
         } else {
             //  JOptionPane.showMessageDialog(this, "An error occurred during registration!", "Error", JOptionPane.ERROR_MESSAGE);
         }
