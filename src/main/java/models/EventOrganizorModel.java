@@ -14,9 +14,9 @@ public class EventOrganizorModel {
     private String email;
     private int contactNumber;
     private String organizationName;
-    private List assignedEvents;
+    private String assignedEvents;
 
-    public EventOrganizorModel(String id, int authId, String name, String email, int contactNumber, String organizationName, List assignedEvents) {
+    public EventOrganizorModel(String id, int authId, String name, String email, int contactNumber, String organizationName, String assignedEvents) {
         this.id = id;
         this.authId = authId;
         this.name = name;
@@ -85,11 +85,11 @@ public class EventOrganizorModel {
     }
 
     // Getter and Setter for assignedEvents
-    public List getAssignedEvents() {
+    public String getAssignedEvents() {
         return assignedEvents;
     }
 
-    public void setAssignedEvents(List assignedEvents) {
+    public void setAssignedEvents(String assignedEvents) {
         this.assignedEvents = assignedEvents;
     }
 }

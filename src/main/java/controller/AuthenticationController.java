@@ -8,6 +8,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import models.AuthenticationModel;
 import resources.DatabaseConnection;
+import view.HomeScreen;
 
 public class AuthenticationController {
 
@@ -105,6 +106,9 @@ public class AuthenticationController {
 
             // If a user is found, return true (authentication successful)
             if (resultSet.next()) {
+                int authId = resultSet.getInt("id"); // Get the authId from the result set
+                HomeScreen homeScreen = new HomeScreen(authId);
+                homeScreen.setVisible(true);
                 return true; // Authentication successful
             }
 

@@ -4,12 +4,31 @@
  */
 package view;
 
+import controller.EventOrganizorController;
+import models.EventModel;
+import models.EventOrganizorModel;
+
 /**
  *
  * @author PMYLS
  */
 public class HomeScreen extends javax.swing.JFrame {
+private EventOrganizorModel organizor;
 
+    public HomeScreen(int authId) {
+        // Fetch the EventOrganizor details using authId
+        organizor = EventOrganizorController.getEventOrganizorDetails(authId);
+
+        // Initialize components
+        initComponents();
+
+        // Display the fetched details
+        if (organizor != null) {
+            userEmail.setText(organizor.getEmail());
+        } else {
+            userEmail.setText("Details not found");
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -20,8 +39,8 @@ public class HomeScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        userEmail = new javax.swing.JLabel();
+        userRole = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         eventName = new javax.swing.JLabel();
@@ -38,12 +57,12 @@ public class HomeScreen extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(102, 0, 102));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("UserName");
+        userEmail.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        userEmail.setForeground(new java.awt.Color(255, 255, 255));
+        userEmail.setText("UserName");
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("role");
+        userRole.setForeground(new java.awt.Color(255, 255, 255));
+        userRole.setText("Event Organizor");
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setForeground(new java.awt.Color(102, 0, 102));
@@ -62,10 +81,10 @@ public class HomeScreen extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(userRole)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(userEmail)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addGap(25, 25, 25))))
@@ -75,10 +94,10 @@ public class HomeScreen extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(17, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(userEmail)
                     .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(userRole)
                 .addGap(12, 12, 12))
         );
 
@@ -249,11 +268,11 @@ public class HomeScreen extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HomeScreen().setVisible(true);
+                new HomeScreen(1).setVisible(true);
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createEventButton;
     private javax.swing.JLabel date;
@@ -261,13 +280,13 @@ public class HomeScreen extends javax.swing.JFrame {
     private javax.swing.JLabel eventName;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel locationLabel;
     private javax.swing.JLabel moreButton;
     private javax.swing.JLabel status;
     private javax.swing.JLabel statusLabel;
+    private javax.swing.JLabel userEmail;
+    private javax.swing.JLabel userRole;
     // End of variables declaration//GEN-END:variables
 }
