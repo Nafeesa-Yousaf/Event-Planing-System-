@@ -7,6 +7,7 @@ view\LoginScreen$2.class
 view\HomeScreen$2.class
 view\HomeScreen.class
 view\SignupScreen$1.class
+eventController.class
 controller\AuthenticationController.class
 view\LoginScreen.class
 view\CreateEventScreen$3.class

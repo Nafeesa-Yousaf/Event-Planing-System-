@@ -4,6 +4,11 @@
  */
 package view;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author PMYLS
@@ -168,7 +173,44 @@ public class CreateEventScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_eventNameTextFieldActionPerformed
 
     private void createEventButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createEventButtonActionPerformed
-        // TODO add your handling code here:
+        // Get input values from the text fields
+        String eventName = eventNameTextField.getText().trim();
+        String eventDate = eventDateTextField.getText().trim();
+        String location = locationTextField.getText().trim();
+        String description = descriptionTextfield.getText().trim();
+
+        // Validate that none of the fields are empty
+        if (eventName.isEmpty() || eventDate.isEmpty() || location.isEmpty() || description.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "All fields are required. Please fill them in.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return; // Exit the method to prevent further processing
+        }
+
+        // Validate the event date format (dd-MM-yyyy)
+        String datePattern = "\\d{2}-\\d{2}-\\d{4}";
+        if (!eventDate.matches(datePattern)) {
+            JOptionPane.showMessageDialog(this, "Invalid date format. Please use dd-MM-yyyy.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Parse the event date to LocalDate and check if it's after today's date
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            LocalDate eventLocalDate = LocalDate.parse(eventDate, formatter);
+            LocalDate currentDate = LocalDate.now();
+
+            if (eventLocalDate.isBefore(currentDate)) {
+                JOptionPane.showMessageDialog(this, "Event date must be after today's date.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this, "Invalid date format. Please use dd-MM-yyyy.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // If all validations pass, proceed with the event creation logic
+        // You can replace this with the actual logic to create the event (e.g., save data to the database)
+        JOptionPane.showMessageDialog(this, "Event Created Successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
     }//GEN-LAST:event_createEventButtonActionPerformed
 
     private void eventDateTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventDateTextFieldActionPerformed
