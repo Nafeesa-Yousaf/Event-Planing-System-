@@ -15,6 +15,7 @@ view\EventDetailsScreen$1.class
 com\mycompany\eventmanagementsystem\EventManagementSystem.class
 models\AuthenticationModel.class
 view\EventOrganizor.class
+controller\EventController.class
 view\SignupScreen$4.class
 view\LoginScreen$3.class
 controller\EventOrganizorController.class

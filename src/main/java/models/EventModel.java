@@ -1,7 +1,6 @@
 package models;
 
 public class EventModel {
-    private String eventId;
     private String name;
     private String date; 
     private String location;
@@ -11,8 +10,7 @@ public class EventModel {
     public EventModel() {
     }
 
-    public EventModel(String eventId, String name, String date, String location, String description, String eventStatus) {
-        this.eventId = eventId;
+    public EventModel( String name, String date, String location, String description, String eventStatus) {
         this.name = name;
         this.date = date;
         this.location = location;
@@ -20,14 +18,7 @@ public class EventModel {
         this.eventStatus = eventStatus;
     }
 
-    // Getters and Setters
-    public String getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(String eventId) {
-        this.eventId = eventId;
-    }
+ 
 
     public String getName() {
         return name;

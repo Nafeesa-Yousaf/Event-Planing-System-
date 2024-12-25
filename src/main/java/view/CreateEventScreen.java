@@ -4,10 +4,12 @@
  */
 package view;
 
+import controller.EventController;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import javax.swing.JOptionPane;
+import models.EventModel;
 
 /**
  *
@@ -206,10 +208,21 @@ public class CreateEventScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Invalid date format. Please use dd-MM-yyyy.", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+// Create EventModel object with gathered data
+    EventModel event = new EventModel( eventName, eventDate, location, description, "upcoming");
 
+    // Use EventController to save the event
+    EventController eventController = new EventController();
+    boolean isSaved = eventController.saveEvent(event);
+
+    // Provide feedback to the user
+    if (isSaved) {
+        JOptionPane.showMessageDialog(this, "Event Created Successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+    } else {
+        JOptionPane.showMessageDialog(this, "Error creating event. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
         // If all validations pass, proceed with the event creation logic
         // You can replace this with the actual logic to create the event (e.g., save data to the database)
-        JOptionPane.showMessageDialog(this, "Event Created Successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
 
     }//GEN-LAST:event_createEventButtonActionPerformed
 
