@@ -7,9 +7,53 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import resources.DatabaseConnection;
 
 public class EventController {
+     // Method to fetch events for a specific organizerId
+    public List<EventModel> getEventsByOrganizerId(String organizerId) {
+        // List to store the events fetched from the database
+        List<EventModel> eventsList = new ArrayList<>();
+
+        // SQL query to fetch events by organizerId
+        String query = "SELECT eventId, eventName, eventDate, location, description, eventStatus "
+                     + "FROM eventdetails WHERE organizorId = ?";
+
+        // Use the existing DB connection from DatabaseConnection class
+        try (Connection connection = DatabaseConnection.connect();  // Get the connection from DBConnection
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            // Set the organizerId parameter in the SQL query
+            preparedStatement.setString(1, organizerId);
+
+            // Execute the query and get the result set
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // Iterate through the result set and map each row to an EventModel object
+            while (resultSet.next()) {
+                // Create a new EventModel object for each event
+                EventModel event = new EventModel();
+                event.setId(resultSet.getString("eventId"));
+                event.setName(resultSet.getString("eventName"));
+                event.setDate(resultSet.getString("eventDate"));
+                event.setLocation(resultSet.getString("location"));
+                event.setDescription(resultSet.getString("description"));
+                event.setEventStatus(resultSet.getString("eventStatus"));
+
+                // Add the event to the list
+                eventsList.add(event);
+            }
+        } catch (SQLException e) {
+            // Handle any SQL exceptions
+            System.out.println("Error while fetching events: " + e.getMessage());
+        }
+
+        // Return the list of events
+        return eventsList;
+    }
 
     // Method to insert event details into the database
     public boolean saveEvent(EventModel event) {
@@ -46,4 +90,6 @@ public class EventController {
             return false;  // Return false if there was an error during insertion
         }
     }
+    
+    
 }

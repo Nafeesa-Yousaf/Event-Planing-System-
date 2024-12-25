@@ -209,7 +209,7 @@ public class CreateEventScreen extends javax.swing.JFrame {
             return;
         }
 // Create EventModel object with gathered data
-    EventModel event = new EventModel( eventName, eventDate, location, description, "upcoming");
+    EventModel event = new EventModel("", eventName, eventDate, location, description, "upcoming");
 
     // Use EventController to save the event
     EventController eventController = new EventController();
