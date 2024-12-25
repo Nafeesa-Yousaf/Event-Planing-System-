@@ -97,6 +97,9 @@ public class HomeScreen extends javax.swing.JFrame {
         moreDetailsButton.setForeground(Color.WHITE); // Set button text color to white
         moreDetailsButton.addActionListener(evt -> {
             // Handle more details action
+            EventDetailsScreen eventDetailScreen=new EventDetailsScreen(event,authId);
+            eventDetailScreen.setVisible(true);
+            this.setVisible(false);
             System.out.println("More details for event: " + event.getName());
         });
 

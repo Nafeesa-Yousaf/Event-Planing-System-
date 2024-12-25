@@ -146,6 +146,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="&#xfe0f;&lt;"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel2MouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
