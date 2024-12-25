@@ -46,8 +46,8 @@ public class HomeScreen extends javax.swing.JFrame {
         eventPanelContainer = new javax.swing.JPanel();
 
         eventPanelContainer.setLayout(new javax.swing.BoxLayout(eventPanelContainer, javax.swing.BoxLayout.Y_AXIS)); // Stack events vertically
-        eventPanel.setLayout(new java.awt.BorderLayout());
-        eventPanel.add(eventPanelContainer, java.awt.BorderLayout.CENTER);
+        eventPanel1.setLayout(new java.awt.BorderLayout());
+        eventPanel1.add(eventPanelContainer, java.awt.BorderLayout.CENTER);
 
         // Fetch events and display them
         List<EventModel> events = new EventController().getEventsByOrganizerId(organizor.getId());
@@ -60,7 +60,7 @@ public class HomeScreen extends javax.swing.JFrame {
         } else {
             JLabel noEventLabel = new JLabel("NO Event Found");
             noEventLabel.setFont(new java.awt.Font("Segoe UI", 1, 18));
-            eventPanel.add(noEventLabel, java.awt.BorderLayout.CENTER);
+            eventPanel1.add(noEventLabel, java.awt.BorderLayout.CENTER);
 
         }
     }
@@ -140,8 +140,9 @@ public class HomeScreen extends javax.swing.JFrame {
         userEmail = new javax.swing.JLabel();
         userRole = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        eventPanel = new javax.swing.JPanel();
         createEventButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        eventPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -175,7 +176,7 @@ public class HomeScreen extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(userEmail)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 601, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addGap(25, 25, 25))))
         );
@@ -191,19 +192,6 @@ public class HomeScreen extends javax.swing.JFrame {
                 .addGap(12, 12, 12))
         );
 
-        eventPanel.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout eventPanelLayout = new javax.swing.GroupLayout(eventPanel);
-        eventPanel.setLayout(eventPanelLayout);
-        eventPanelLayout.setHorizontalGroup(
-            eventPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 272, Short.MAX_VALUE)
-        );
-        eventPanelLayout.setVerticalGroup(
-            eventPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 182, Short.MAX_VALUE)
-        );
-
         createEventButton.setBackground(new java.awt.Color(102, 0, 102));
         createEventButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         createEventButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -214,29 +202,47 @@ public class HomeScreen extends javax.swing.JFrame {
             }
         });
 
+        eventPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout eventPanel1Layout = new javax.swing.GroupLayout(eventPanel1);
+        eventPanel1.setLayout(eventPanel1Layout);
+        eventPanel1Layout.setHorizontalGroup(
+            eventPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 671, Short.MAX_VALUE)
+        );
+        eventPanel1Layout.setVerticalGroup(
+            eventPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 489, Short.MAX_VALUE)
+        );
+
+        jScrollPane1.setViewportView(eventPanel1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(eventPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(createEventButton)
                 .addGap(40, 40, 40))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(28, 28, 28)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(28, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(120, 120, 120)
-                .addComponent(eventPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
-                .addComponent(createEventButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
-            .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 441, Short.MAX_VALUE)
+                .addComponent(createEventButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(88, 88, 88)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(88, Short.MAX_VALUE)))
         );
 
         pack();
@@ -292,8 +298,10 @@ public class HomeScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createEventButton;
     private javax.swing.JPanel eventPanel;
+    private javax.swing.JPanel eventPanel1;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel userEmail;
     private javax.swing.JLabel userRole;
     // End of variables declaration//GEN-END:variables
