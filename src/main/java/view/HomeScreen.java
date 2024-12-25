@@ -7,7 +7,11 @@ package view;
 import controller.EventController;
 import controller.EventOrganizorController;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.util.List;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -23,8 +27,10 @@ public class HomeScreen extends javax.swing.JFrame {
 
     private EventOrganizorModel organizor;
     private JPanel eventPanelContainer; // Container for dynamic events
+    private int authId;
 
     public HomeScreen(int authId) {
+        this.authId = authId;
         // Fetch the EventOrganizor details using authId
         organizor = EventOrganizorController.getEventOrganizorDetails(authId);
 
@@ -60,14 +66,18 @@ public class HomeScreen extends javax.swing.JFrame {
     }
 
     // Method to add individual event to the container
+    // Method to add individual event to the container
     private void addEventToPanel(EventModel event) {
         // Create a new panel for each event
         JPanel eventDisplayPanel = new JPanel();
         eventDisplayPanel.setLayout(new BoxLayout(eventDisplayPanel, BoxLayout.Y_AXIS)); // Stack vertically
+        eventDisplayPanel.setBackground(Color.WHITE); // Set background color to white
+        eventDisplayPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Add some space around each event container
 
         // Event Name
         JLabel eventNameLabel = new JLabel("Event Name: " + event.getName());
         eventNameLabel.setFont(new java.awt.Font("Segoe UI", 1, 18));
+        eventNameLabel.setForeground(new Color(102, 0, 102)); // Set event name color to purple
 
         // Event Status
         JLabel statusLabel = new JLabel("Status: " + event.getEventStatus());
@@ -83,6 +93,8 @@ public class HomeScreen extends javax.swing.JFrame {
 
         // "More Details" button
         JButton moreDetailsButton = new JButton("More Details");
+        moreDetailsButton.setBackground(new Color(102, 0, 102)); // Set button color to purple
+        moreDetailsButton.setForeground(Color.WHITE); // Set button text color to white
         moreDetailsButton.addActionListener(evt -> {
             // Handle more details action
             System.out.println("More details for event: " + event.getName());
@@ -95,8 +107,15 @@ public class HomeScreen extends javax.swing.JFrame {
         eventDisplayPanel.add(locationLabel);
         eventDisplayPanel.add(moreDetailsButton);
 
+        // Set the event panel to take up the full width
+        eventDisplayPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, eventDisplayPanel.getPreferredSize().height));
+
         // Add the event panel to the eventPanelContainer
         eventPanelContainer.add(eventDisplayPanel);
+
+        // Add some space between each event container
+        eventPanelContainer.add(Box.createVerticalStrut(20)); // Adjust the vertical gap as needed
+
         eventPanelContainer.revalidate(); // Refresh the container
         eventPanelContainer.repaint(); // Repaint the container
     }
@@ -153,7 +172,7 @@ public class HomeScreen extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(userEmail)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 601, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addGap(25, 25, 25))))
         );
@@ -197,24 +216,24 @@ public class HomeScreen extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(eventPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(486, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(37, 37, 37)
+                .addComponent(eventPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(createEventButton)
                 .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(120, 120, 120)
                 .addComponent(eventPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
                 .addComponent(createEventButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -222,6 +241,9 @@ public class HomeScreen extends javax.swing.JFrame {
 
 
     private void createEventButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createEventButtonActionPerformed
+        this.setVisible(false);
+        CreateEventScreen createEventScreen = new CreateEventScreen(organizor.getId(), authId);
+        createEventScreen.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_createEventButtonActionPerformed
 

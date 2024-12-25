@@ -56,7 +56,7 @@ public class EventController {
     }
 
     // Method to insert event details into the database
-    public boolean saveEvent(EventModel event) {
+    public boolean saveEvent(EventModel event,String organizorId) {
         // SQL query to insert event details into the eventdetails table
         String query = "INSERT INTO eventdetails ( eventName, eventDate, location, description, organizorId, eventStatus) "
                      + "VALUES ( ?, ?, ?, ?, ?, ?)";
@@ -76,7 +76,7 @@ public class EventController {
             preparedStatement.setDate(2, sqlDate);  // Event Date (converted to SQL Date)
             preparedStatement.setString(3, event.getLocation());  // Event Location
             preparedStatement.setString(4, event.getDescription());  // Event Description
-            preparedStatement.setString(5, "EO4");  // Organize ID, hardcoded as EO4 for now
+            preparedStatement.setString(5, organizorId);  // Organize ID, hardcoded as EO4 for now
             preparedStatement.setString(6, event.getEventStatus());  // Event Status
 
             // Execute the insert query
