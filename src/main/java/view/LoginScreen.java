@@ -1,22 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package view;
 
 import controller.AuthenticationController;
 import javax.swing.JOptionPane;
 import models.AuthenticationModel;
 
-/**
- *
- * @author PMYLS
- */
 public class LoginScreen extends javax.swing.JFrame {
 
-    /**
-     * Creates new form LoginScreen
-     */
+   
     public LoginScreen() {
         initComponents();
     }
@@ -196,12 +187,10 @@ public class LoginScreen extends javax.swing.JFrame {
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
 
-        // Retrieve the values entered by the user
         String email = emailTextField.getText();
         String password = new String(passwordTextField.getPassword());
         String role = (String) roleDropDown.getSelectedItem();
 
-        // Validation checks
         if (email.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Email is required.", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -217,18 +206,13 @@ public class LoginScreen extends javax.swing.JFrame {
             return;
         }
 
-        // Create an AuthenticationModel object with the user's input
         AuthenticationModel authModel = new AuthenticationModel(email, password, role);
 
-        // Authenticate the user
         boolean isAuthenticated = AuthenticationController.authenticateUser(authModel);
 
-        // If authentication is successful, proceed to the next screen
         if (isAuthenticated) {
             JOptionPane.showMessageDialog(null, "Login successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            // Navigate to the dashboard or main screen
-            // new MainScreen().setVisible(true); 
-            this.setVisible(false); // Hide the current login screen
+            this.setVisible(false); 
         } else {
             JOptionPane.showMessageDialog(null, "Invalid email or password.", "Authentication Failed", JOptionPane.ERROR_MESSAGE);
         }
@@ -237,45 +221,10 @@ public class LoginScreen extends javax.swing.JFrame {
     private void loginNavigationTextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginNavigationTextMouseClicked
         this.setVisible(false);
 
-        // Create and show the LoginForm
         SignupScreen signupScreen = new SignupScreen();
         signupScreen.setVisible(true);    }//GEN-LAST:event_loginNavigationTextMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoginScreen().setVisible(true);
-            }
-        });
-    }
-
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LoginButton;
     private javax.swing.JLabel emailLabel;

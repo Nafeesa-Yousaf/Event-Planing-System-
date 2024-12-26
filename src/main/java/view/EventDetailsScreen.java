@@ -1,36 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view;
 
 import models.EventModel;
 
-/**
- *
- * @author PMYLS
- */
 public class EventDetailsScreen extends javax.swing.JFrame {
 
     private EventModel event;
     private int authId;
 
-    // Constructor to accept event object
     public EventDetailsScreen(EventModel event, int authId) {
         this.event = event;
-        this.authId=authId;
+        this.authId = authId;
         initComponents();
-        updateEventDetails(); // Update UI components with event data
+        updateEventDetails();
     }
 
     private void updateEventDetails() {
-        // Set event details on the labels
         eventName.setText(event.getName());
         eventDate.setText(event.getDate());
         locational.setText(event.getLocation());
         description.setText(event.getDescription());
         status.setText(event.getEventStatus());
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -202,11 +193,10 @@ public class EventDetailsScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-HomeScreen homeScreen = new HomeScreen(authId);
+        HomeScreen homeScreen = new HomeScreen(authId);
         this.setVisible(false);
-                homeScreen.setVisible(true);          // TODO add your handling code here:
+        homeScreen.setVisible(true);
     }//GEN-LAST:event_jLabel2MouseClicked
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

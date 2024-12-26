@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view;
 
 import controller.EventController;
@@ -11,23 +7,15 @@ import java.time.format.DateTimeParseException;
 import javax.swing.JOptionPane;
 import models.EventModel;
 
-/**
- *
- * @author PMYLS
- */
 public class CreateEventScreen extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CreateEventScreen
-     */
-    private String organizerId; 
-    private int authId;// Store the organizer ID
+    private final String organizerId;
+    private final int authId;
 
-    // Modify the constructor to accept organizerId
-    public CreateEventScreen(String organizerId,int authId) {
+    public CreateEventScreen(String organizerId, int authId) {
         initComponents();
-        this.authId=authId;
-        this.organizerId = organizerId;  // Store the passed organizer ID
+        this.authId = authId;
+        this.organizerId = organizerId;
     }
 
     /**
@@ -195,26 +183,22 @@ public class CreateEventScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_eventNameTextFieldActionPerformed
 
     private void createEventButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createEventButtonActionPerformed
-        // Get input values from the text fields
         String eventName = eventNameTextField.getText().trim();
         String eventDate = eventDateTextField.getText().trim();
         String location = locationTextField.getText().trim();
         String description = descriptionTextfield.getText().trim();
 
-        // Validate that none of the fields are empty
         if (eventName.isEmpty() || eventDate.isEmpty() || location.isEmpty() || description.isEmpty()) {
             JOptionPane.showMessageDialog(this, "All fields are required. Please fill them in.", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return; // Exit the method to prevent further processing
         }
 
-        // Validate the event date format (dd-MM-yyyy)
         String datePattern = "\\d{2}-\\d{2}-\\d{4}";
         if (!eventDate.matches(datePattern)) {
             JOptionPane.showMessageDialog(this, "Invalid date format. Please use dd-MM-yyyy.", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // Parse the event date to LocalDate and check if it's after today's date
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             LocalDate eventLocalDate = LocalDate.parse(eventDate, formatter);
@@ -228,25 +212,20 @@ public class CreateEventScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Invalid date format. Please use dd-MM-yyyy.", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-// Create EventModel object with gathered data
-    EventModel event = new EventModel("", eventName, eventDate, location, description, "upcoming");
+        EventModel event = new EventModel("", eventName, eventDate, location, description, "upcoming");
 
-    // Use EventController to save the event
-    EventController eventController = new EventController();
-    boolean isSaved = eventController.saveEvent(event,organizerId);
+        EventController eventController = new EventController();
+        boolean isSaved = eventController.saveEvent(event, organizerId);
 
-    // Provide feedback to the user
-    if (isSaved) {
-        JOptionPane.showMessageDialog(this, "Event Created Successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-        HomeScreen homeScreen = new HomeScreen(authId);
-        this.setVisible(false);
-                homeScreen.setVisible(true);
-        
-    } else {
-        JOptionPane.showMessageDialog(this, "Error creating event. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-        // If all validations pass, proceed with the event creation logic
-        // You can replace this with the actual logic to create the event (e.g., save data to the database)
+        if (isSaved) {
+            JOptionPane.showMessageDialog(this, "Event Created Successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            HomeScreen homeScreen = new HomeScreen(authId);
+            this.setVisible(false);
+            homeScreen.setVisible(true);
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Error creating event. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
     }//GEN-LAST:event_createEventButtonActionPerformed
 
@@ -255,14 +234,13 @@ public class CreateEventScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_eventDateTextFieldActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-HomeScreen homeScreen = new HomeScreen(authId);
+        HomeScreen homeScreen = new HomeScreen(authId);
         this.setVisible(false);
                 homeScreen.setVisible(true);    }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createEventButton;

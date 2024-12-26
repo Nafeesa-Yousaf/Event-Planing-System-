@@ -1,6 +1,5 @@
 resources\DatabaseConnection.class
 view\CreateEventScreen.class
-view\LoginScreen$4.class
 view\CreateEventScreen$1.class
 view\LoginScreen$2.class
 view\HomeScreen$2.class
@@ -16,7 +15,6 @@ controller\EventController.class
 view\SignupScreen$4.class
 view\LoginScreen$3.class
 controller\EventOrganizorController.class
-view\HomeScreen$3.class
 models\EventModel.class
 view\SignupScreen$2.class
 models\EventOrganizorModel.class

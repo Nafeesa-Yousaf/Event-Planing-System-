@@ -1,12 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view;
 
 import controller.EventController;
 import controller.EventOrganizorController;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.List;
@@ -19,40 +14,30 @@ import javax.swing.JPanel;
 import models.EventModel;
 import models.EventOrganizorModel;
 
-/**
- *
- * @author PMYLS
- */
 public class HomeScreen extends javax.swing.JFrame {
 
-    private EventOrganizorModel organizor;
-    private JPanel eventPanelContainer; // Container for dynamic events
-    private int authId;
+    private final EventOrganizorModel organizor;
+    private final JPanel eventPanelContainer;
+    private final int authId;
 
     public HomeScreen(int authId) {
         this.authId = authId;
-        // Fetch the EventOrganizor details using authId
         organizor = EventOrganizorController.getEventOrganizorDetails(authId);
 
-        // Initialize components
         initComponents();
-        // Display the fetched details
         if (organizor != null) {
             userEmail.setText(organizor.getEmail());
         } else {
             userEmail.setText("Details not found");
         }
-        // Initialize eventPanelContainer
         eventPanelContainer = new javax.swing.JPanel();
 
-        eventPanelContainer.setLayout(new javax.swing.BoxLayout(eventPanelContainer, javax.swing.BoxLayout.Y_AXIS)); // Stack events vertically
+        eventPanelContainer.setLayout(new javax.swing.BoxLayout(eventPanelContainer, javax.swing.BoxLayout.Y_AXIS));
         eventPanel1.setLayout(new java.awt.BorderLayout());
         eventPanel1.add(eventPanelContainer, java.awt.BorderLayout.CENTER);
 
-        // Fetch events and display them
         List<EventModel> events = new EventController().getEventsByOrganizerId(organizor.getId());
 
-        // Dynamically add events to eventPanelContainer
         if (events != null && !events.isEmpty()) {
             for (EventModel event : events) {
                 addEventToPanel(event);
@@ -65,65 +50,51 @@ public class HomeScreen extends javax.swing.JFrame {
         }
     }
 
-    // Method to add individual event to the container
-    // Method to add individual event to the container
     private void addEventToPanel(EventModel event) {
-        // Create a new panel for each event
         JPanel eventDisplayPanel = new JPanel();
-        eventDisplayPanel.setLayout(new BoxLayout(eventDisplayPanel, BoxLayout.Y_AXIS)); // Stack vertically
-        eventDisplayPanel.setBackground(Color.WHITE); // Set background color to white
-        eventDisplayPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Add some space around each event container
+        eventDisplayPanel.setLayout(new BoxLayout(eventDisplayPanel, BoxLayout.Y_AXIS));
+        eventDisplayPanel.setBackground(Color.WHITE);
+        eventDisplayPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        // Event Name
         JLabel eventNameLabel = new JLabel("Event Name: " + event.getName());
         eventNameLabel.setFont(new java.awt.Font("Segoe UI", 1, 18));
         eventNameLabel.setForeground(new Color(102, 0, 102)); // Set event name color to purple
 
-        // Event Status
         JLabel statusLabel = new JLabel("Status: " + event.getEventStatus());
         statusLabel.setFont(new java.awt.Font("Segoe UI", 0, 14));
 
-        // Event Date
         JLabel dateLabel = new JLabel("Date: " + event.getDate());
         dateLabel.setFont(new java.awt.Font("Segoe UI", 0, 14));
 
-        // Event Location
         JLabel locationLabel = new JLabel("Location: " + event.getLocation());
         locationLabel.setFont(new java.awt.Font("Segoe UI", 0, 14));
 
-        // "More Details" button
         JButton moreDetailsButton = new JButton("More Details");
-        moreDetailsButton.setBackground(new Color(102, 0, 102)); // Set button color to purple
-        moreDetailsButton.setForeground(Color.WHITE); // Set button text color to white
+        moreDetailsButton.setBackground(new Color(102, 0, 102));
+        moreDetailsButton.setForeground(Color.WHITE);
         moreDetailsButton.addActionListener(evt -> {
-            // Handle more details action
-            EventDetailsScreen eventDetailScreen=new EventDetailsScreen(event,authId);
+            EventDetailsScreen eventDetailScreen = new EventDetailsScreen(event, authId);
             eventDetailScreen.setVisible(true);
             this.setVisible(false);
             System.out.println("More details for event: " + event.getName());
         });
 
-        // Add components to the event panel
         eventDisplayPanel.add(eventNameLabel);
         eventDisplayPanel.add(statusLabel);
         eventDisplayPanel.add(dateLabel);
         eventDisplayPanel.add(locationLabel);
         eventDisplayPanel.add(moreDetailsButton);
 
-        // Set the event panel to take up the full width
         eventDisplayPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, eventDisplayPanel.getPreferredSize().height));
 
-        // Add the event panel to the eventPanelContainer
         eventPanelContainer.add(eventDisplayPanel);
 
-        // Add some space between each event container
-        eventPanelContainer.add(Box.createVerticalStrut(20)); // Adjust the vertical gap as needed
+        eventPanelContainer.add(Box.createVerticalStrut(20));
 
-        eventPanelContainer.revalidate(); // Refresh the container
-        eventPanelContainer.repaint(); // Repaint the container
+        eventPanelContainer.revalidate();
+        eventPanelContainer.repaint();
     }
 
-    // Dynamically add event details to the UI
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -254,51 +225,15 @@ public class HomeScreen extends javax.swing.JFrame {
         this.setVisible(false);
         CreateEventScreen createEventScreen = new CreateEventScreen(organizor.getId(), authId);
         createEventScreen.setVisible(true);
-        // TODO add your handling code here:
     }//GEN-LAST:event_createEventButtonActionPerformed
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
- this.setVisible(false);
+        this.setVisible(false);
 
-        // Create and show the LoginForm
         LoginScreen loginScreen = new LoginScreen();
-        loginScreen.setVisible(true);           // TODO add your handling code here:
+        loginScreen.setVisible(true);
     }//GEN-LAST:event_logoutButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HomeScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HomeScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HomeScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HomeScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new HomeScreen(1).setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createEventButton;

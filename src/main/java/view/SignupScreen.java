@@ -1,18 +1,14 @@
+/*
+ * @author Nafeesa Yousaf
+ */
 package view;
 
 import controller.AuthenticationController;
 import javax.swing.JOptionPane;
 import models.AuthenticationModel;
 
-/**
- *
- * @author Nafeesa Yousaf
- */
 public class SignupScreen extends javax.swing.JFrame {
 
-    /**
-     * Creates new form SignupForm
-     */
     public SignupScreen() {
         initComponents();
     }
@@ -204,25 +200,21 @@ public class SignupScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
-        // Retrieve input values
         String email = emailTextField.getText().trim();
         String password = new String(passwordTextField.getPassword());
         String confirmPassword = new String(confirmPasswordTextField.getPassword());
         String role = (String) roleDropDown.getSelectedItem();
 
-        // Validate Email (Regex for basic email format)
         if (email.isEmpty() || !email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
             JOptionPane.showMessageDialog(this, "Enter a valid email address!", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // Validate Role
         if (role == null || role.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please select a role!", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // Validate Password (Ensure password length is adequate)
         if (password.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Password cannot be empty!", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -232,7 +224,6 @@ public class SignupScreen extends javax.swing.JFrame {
             return;
         }
 
-        // Validate Confirm Password
         if (confirmPassword.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Confirm password cannot be empty!", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -242,10 +233,8 @@ public class SignupScreen extends javax.swing.JFrame {
             return;
         }
 
-        // If all validations pass, you can proceed to create a new AuthenticationModel and call the controller
         AuthenticationModel newUser = new AuthenticationModel(email, password, role);
 
-        // Call AuthenticationController to store data in the database
         AuthenticationController authController = new AuthenticationController();
         boolean isSuccess = authController.registerUser(newUser);
 
@@ -256,7 +245,6 @@ public class SignupScreen extends javax.swing.JFrame {
             LoginScreen loginForm = new LoginScreen();
             loginForm.setVisible(true);
         } else {
-            //  JOptionPane.showMessageDialog(this, "An error occurred during registration!", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
 
@@ -272,37 +260,8 @@ public class SignupScreen extends javax.swing.JFrame {
         LoginScreen loginForm = new LoginScreen();
         loginForm.setVisible(true);    }//GEN-LAST:event_loginNavigationTextMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SignupScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SignupScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SignupScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SignupScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new SignupScreen().setVisible(true);
