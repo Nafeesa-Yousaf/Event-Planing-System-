@@ -12,32 +12,25 @@ import view.HomeScreen;
 
 public class AuthenticationController {
 
-    // Method to register a new user
     public static boolean registerUser(AuthenticationModel authModel) {
-        // Establishing database connection
         Connection connection = DatabaseConnection.connect();
 
         if (connection == null) {
-            JOptionPane.showMessageDialog(null, "Database connection failed", "Error", JOptionPane.ERROR_MESSAGE);
+            showErrorDialog("Database connection failed");
             return false;
         }
 
-        // SQL query to check if the email already exists
         String checkEmailQuery = "SELECT COUNT(*) FROM users WHERE email = ?";
 
         try (PreparedStatement checkEmailStmt = connection.prepareStatement(checkEmailQuery)) {
             checkEmailStmt.setString(1, authModel.getEmail());
-
-            // Execute the query and check if the email exists
             ResultSet resultSet = checkEmailStmt.executeQuery();
 
             if (resultSet.next() && resultSet.getInt(1) > 0) {
-                // Email is already registered
-                JOptionPane.showMessageDialog(null, "User already registered with the same email", "Error", JOptionPane.ERROR_MESSAGE);
+                showErrorDialog("User already registered with the same email");
                 return false;
             }
 
-            // SQL query to insert user data into the users table
             String insertQuery = "INSERT INTO users (email, password, role) VALUES (?, ?, ?)";
 
             try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS)) {
@@ -45,85 +38,82 @@ public class AuthenticationController {
                 preparedStatement.setString(2, authModel.getPassword());
                 preparedStatement.setString(3, authModel.getRole());
 
-                // Execute the query and get the generated keys (authId)
                 int rowsAffected = preparedStatement.executeUpdate();
 
                 if (rowsAffected > 0) {
-                    // Get the generated user ID (authId)
                     ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
                     if (generatedKeys.next()) {
-                        int authId = generatedKeys.getInt(1); // Get the generated authId
-                        String id = "EO" + authId; // Example: Create a unique ID for EventOrganizor (you can modify this logic)
+                        int authId = generatedKeys.getInt(1);
+                        String id = generateUniqueId(authId);
 
-                        // Now call EventOrganizorController to add the user to EventOrganizor table
-                        boolean isCreated = EventOrganizorController.createEventOrganizor(authModel.getEmail(), authId, id);
-                        if (isCreated) {
-                            return true; // User and EventOrganizor created successfully
-                        } else {
-                            return false; // EventOrganizor creation failed
-                        }
+                        return EventOrganizorController.createEventOrganizor(authModel.getEmail(), authId, id);
                     }
                 }
-                return false; // If user creation fails
+                return false;
 
             } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "Error while inserting user: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                showErrorDialog("Error while inserting user: " + e.getMessage());
                 return false;
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error while checking email: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            showErrorDialog("Error while checking email: " + e.getMessage());
             return false;
         } finally {
-            try {
-                if (connection != null && !connection.isClosed()) {
-                    connection.close(); // Close the connection
-                }
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "Error closing connection: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
+            closeConnection(connection);
         }
     }
 
     public static boolean authenticateUser(AuthenticationModel authModel) {
-        // Establishing database connection
         Connection connection = DatabaseConnection.connect();
 
         if (connection == null) {
-            return false; // Return false if the connection failed
+            return false;
         }
 
-        // SQL query to check if the user exists in the database
         String query = "SELECT * FROM users WHERE email = ? AND password = ? AND role = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            // Set the parameters for the query
             preparedStatement.setString(1, authModel.getEmail());
             preparedStatement.setString(2, authModel.getPassword());
             preparedStatement.setString(3, authModel.getRole());
 
-            // Execute the query and get the result
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            // If a user is found, return true (authentication successful)
             if (resultSet.next()) {
-                int authId = resultSet.getInt("id"); // Get the authId from the result set
-                HomeScreen homeScreen = new HomeScreen(authId);
-                homeScreen.setVisible(true);
-                return true; // Authentication successful
+                int authId = resultSet.getInt("id");
+                displayHomeScreen(authId);
+                return true;
             }
-
-            // If no matching user is found, return false (authentication failed)
             return false;
         } catch (SQLException e) {
-            e.printStackTrace(); // Print the stack trace for debugging
-            return false; // Return false in case of any exception
+            e.printStackTrace();
+            return false;
         } finally {
+            closeConnection(connection);
+        }
+    }
+
+    private static void showErrorDialog(String message) {
+        JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    private static String generateUniqueId(int authId) {
+        return "EO" + authId;
+    }
+
+    private static void displayHomeScreen(int authId) {
+        HomeScreen homeScreen = new HomeScreen(authId);
+        homeScreen.setVisible(true);
+    }
+
+    private static void closeConnection(Connection connection) {
+        if (connection != null) {
             try {
-                if (connection != null && !connection.isClosed()) {
-                    connection.close(); // Close the connection
+                if (!connection.isClosed()) {
+                    connection.close();
                 }
             } catch (SQLException e) {
-                e.printStackTrace(); // Print stack trace for connection closing issues
+                e.printStackTrace();
             }
         }
     }

@@ -1,11 +1,5 @@
 package models;
 
-import java.util.*;
-
-/**
- *
- * @author Nafeesa Yousaf
- */
 public class EventOrganizorModel {
 
     private String id;
@@ -30,7 +24,6 @@ public class EventOrganizorModel {
     }
 
     ;
-    // Getter and Setter for id
     public String getId() {
         return id;
     }
@@ -39,7 +32,6 @@ public class EventOrganizorModel {
         this.id = id;
     }
 
-    // Getter and Setter for authId
     public int getAuthId() {
         return authId;
     }
@@ -48,7 +40,6 @@ public class EventOrganizorModel {
         this.authId = authId;
     }
 
-    // Getter and Setter for name
     public String getName() {
         return name;
     }
@@ -57,7 +48,6 @@ public class EventOrganizorModel {
         this.name = name;
     }
 
-    // Getter and Setter for email
     public String getEmail() {
         return email;
     }
@@ -66,7 +56,6 @@ public class EventOrganizorModel {
         this.email = email;
     }
 
-    // Getter and Setter for contactNumber
     public int getContactNumber() {
         return contactNumber;
     }
@@ -75,7 +64,6 @@ public class EventOrganizorModel {
         this.contactNumber = contactNumber;
     }
 
-    // Getter and Setter for organizationName
     public String getOrganizationName() {
         return organizationName;
     }
@@ -84,7 +72,6 @@ public class EventOrganizorModel {
         this.organizationName = organizationName;
     }
 
-    // Getter and Setter for assignedEvents
     public String getAssignedEvents() {
         return assignedEvents;
     }

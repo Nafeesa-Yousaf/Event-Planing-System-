@@ -1,18 +1,19 @@
 package models;
 
 public class EventModel {
+
     private String id;
     private String name;
-    private String date; 
+    private String date;
     private String location;
     private String description;
-    private String eventStatus; 
+    private String eventStatus;
 
     public EventModel() {
     }
 
     public EventModel(String id, String name, String date, String location, String description, String eventStatus) {
-        this.id=id;
+        this.id = id;
         this.name = name;
         this.date = date;
         this.location = location;
@@ -20,13 +21,14 @@ public class EventModel {
         this.eventStatus = eventStatus;
     }
 
- 
-public String getId(){
-    return id;
-}
-public void setId(String id){
-    this.id=id;
-}
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }

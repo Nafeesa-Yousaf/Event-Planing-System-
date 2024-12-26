@@ -1,9 +1,5 @@
 package resources;
 
-/**
- *
- * @author Nafeesa Yousaf
- */
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

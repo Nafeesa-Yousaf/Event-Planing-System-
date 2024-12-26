@@ -1,9 +1,5 @@
 package models;
 
-/**
- *
- * @author Nafeesa Yousaf
- */
 public class AuthenticationModel {
 
     private String email;
