@@ -139,7 +139,7 @@ public class HomeScreen extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         userEmail = new javax.swing.JLabel();
         userRole = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        logoutButton = new javax.swing.JButton();
         createEventButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         eventPanel1 = new javax.swing.JPanel();
@@ -155,12 +155,12 @@ public class HomeScreen extends javax.swing.JFrame {
         userRole.setForeground(new java.awt.Color(255, 255, 255));
         userRole.setText("Event Organizor");
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setForeground(new java.awt.Color(102, 0, 102));
-        jButton2.setText("Profile");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        logoutButton.setBackground(new java.awt.Color(255, 255, 255));
+        logoutButton.setForeground(new java.awt.Color(102, 0, 102));
+        logoutButton.setText("Logout");
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                logoutButtonActionPerformed(evt);
             }
         });
 
@@ -176,8 +176,8 @@ public class HomeScreen extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(userEmail)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 498, Short.MAX_VALUE)
+                        .addComponent(logoutButton)
                         .addGap(25, 25, 25))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -186,7 +186,7 @@ public class HomeScreen extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(userEmail)
-                    .addComponent(jButton2))
+                    .addComponent(logoutButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(userRole)
                 .addGap(12, 12, 12))
@@ -222,10 +222,10 @@ public class HomeScreen extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(createEventButton)
-                .addGap(40, 40, 40))
+                .addGap(32, 32, 32))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(28, 28, 28)
@@ -236,8 +236,9 @@ public class HomeScreen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 441, Short.MAX_VALUE)
-                .addComponent(createEventButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 427, Short.MAX_VALUE)
+                .addComponent(createEventButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(88, 88, 88)
@@ -256,9 +257,13 @@ public class HomeScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_createEventButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+ this.setVisible(false);
+
+        // Create and show the LoginForm
+        LoginScreen loginScreen = new LoginScreen();
+        loginScreen.setVisible(true);           // TODO add your handling code here:
+    }//GEN-LAST:event_logoutButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -299,9 +304,9 @@ public class HomeScreen extends javax.swing.JFrame {
     private javax.swing.JButton createEventButton;
     private javax.swing.JPanel eventPanel;
     private javax.swing.JPanel eventPanel1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton logoutButton;
     private javax.swing.JLabel userEmail;
     private javax.swing.JLabel userRole;
     // End of variables declaration//GEN-END:variables
